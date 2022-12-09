@@ -1,6 +1,6 @@
 # Formidable Scheduler
 
-Formidable Scheduler is a Task Scheduling based on GNU crontab.
+Formidable Scheduler is a Task Scheduler based on GNU crontab.
 
 ## Requirements
 

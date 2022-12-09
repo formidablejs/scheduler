@@ -2,7 +2,7 @@
   "name": "@formidablejs/scheduler",
   "version": "0.0.1",
   "main": "lib/index.js",
-  "description": "Formidable Scheduler is a Task Scheduling based on GNU crontab",
+  "description": "Formidable Scheduler is a Task Scheduler based on GNU crontab",
   "author": "Donald Pakkies",
   "license": "MIT",
   "types": "types/index.d.ts",
