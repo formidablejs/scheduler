@@ -1,0 +1,33 @@
+{
+  "name": "@formidablejs/scheduler",
+  "version": "0.0.1",
+  "main": "lib/index.js",
+  "description": "Formidable Scheduler is a Task Scheduling based on GNU crontab",
+  "author": "Donald Pakkies",
+  "license": "MIT",
+  "types": "types/index.d.ts",
+  "bugs": "https://github.com/formidablejs/scheduler/issues",
+  "homepage": "https://github.com/formidablejs/scheduler",
+  "repository": "https://github.com/formidablejs/scheduler",
+  "files": [
+    "lib",
+    "types"
+  ],
+  "scripts": {
+    "build": "npm run imba:build && npm run imba:build:temp",
+    "imba:build": "imbac src --output=lib --platform=node --format=cjs --clean",
+    "imba:build:temp": "imbac src --output=.temp --platform=node --clean",
+    "imba:watch": "imbac -w src --output=lib --platform=node --clean"
+  },
+  "peerDependencies": {
+    "@formidablejs/framework": "*"
+  },
+  "devDependencies": {
+    "@formidablejs/framework": "^0.13.11",
+    "imba": "2.0.0-alpha.215"
+  },
+  "dependencies": {
+    "cron-time-generator": "^1.3.0",
+    "node-cron": "^3.0.2"
+  }
+}

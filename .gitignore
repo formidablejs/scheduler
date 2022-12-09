@@ -1,0 +1,11 @@
+/node_modules
+/public
+/.temp
+/lib
+/output
+/test/e2e
+.env
+.env.backup
+npm-debug.log
+yarn-error.log
+*.tgz
