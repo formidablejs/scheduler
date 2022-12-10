@@ -1,5 +1,8 @@
 import { ConsoleKernel, ServiceResolver } from '@formidablejs/framework'
 import { Scheduler } from './Scheduler'
+import { Command } from './Commands/Command'
+import { ScheduleList } from './Commands/ScheduleList'
+import { ScheduleRun } from './Commands/ScheduleRun'
 import cron from 'node-cron'
 
 export class SchedulerServiceResolver < ServiceResolver
@@ -10,3 +13,10 @@ export class SchedulerServiceResolver < ServiceResolver
 		self.app
 			.make(ConsoleKernel)
 			.schedule(cron)
+
+		# pass cron to "schedule" commands
+		Command.setCron(cron)
+
+		# register command to application
+		self.app.registerCommand(ScheduleList)
+		self.app.registerCommand(ScheduleRun)
