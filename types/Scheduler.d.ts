@@ -7,6 +7,17 @@ export class Scheduler {
     constructor(cron: any, callback: Function);
     cron: any;
     callback: Function;
+
+    /**
+     * Set task name
+     */
+    name(name: string): Scheduler;
+
+    /**
+     * Set default timezone for tasks
+     */
+    timezone(timezone: string): Scheduler;
+
     /**
     @param {number} interval
     */
@@ -165,9 +176,8 @@ export class Scheduler {
     /** @param {number} start - Start*/
     /** @param {number} end - End*/
     /**
-    @param {number} start
-    @param {number} end
+    @param {string} expression
     */
-    between(start: number, end: number): any;
+    run(expression: string): any;
 }
 import { EveryTime } from "./EveryTime";

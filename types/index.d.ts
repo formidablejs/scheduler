@@ -1,3 +1,4 @@
+import { Command } from './Commands/Command'
 import { EveryTime } from "./EveryTime";
 import { SchedulerServiceResolver } from "./SchedulerServiceResolver";
 import { Schedule } from "./Schedule";
@@ -14,4 +15,10 @@ declare module '@formidablejs/framework' {
     }
 }
 
-export { EveryTime, Schedule, Scheduler, SchedulerServiceResolver };
+export {
+    Command,
+    EveryTime,
+    Schedule,
+    Scheduler,
+    SchedulerServiceResolver
+};
