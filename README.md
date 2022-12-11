@@ -2,6 +2,13 @@
 
 Formidable Scheduler is a Task Scheduler based on GNU crontab.
 
+<center>
+
+  ![npm](https://img.shields.io/npm/v/@formidablejs/scheduler)
+  ![GitHub](https://img.shields.io/github/license/formidablejs/scheduler)
+
+</center>
+
 Credits
 -------
 
