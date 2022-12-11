@@ -7,7 +7,7 @@
   "license": "MIT",
   "types": "types/index.d.ts",
   "bugs": "https://github.com/formidablejs/scheduler/issues",
-  "homepage": "https://github.com/formidablejs/scheduler",
+  "homepage": "https://www.formidablejs.org/docs/scheduling",
   "repository": "https://github.com/formidablejs/scheduler",
   "files": [
     "lib",
