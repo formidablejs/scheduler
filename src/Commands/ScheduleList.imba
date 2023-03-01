@@ -24,6 +24,12 @@ export class ScheduleList < Command
 				'Next Due': parser.parseExpression(task.options.expression, options).next!.toString!
 			}
 
+
+		if tasks.length == 0
+			this.message 'info', 'No scheduled tasks have been defined'
+
+			this.exit!
+
 		table tasks
 
 		this.exit!
