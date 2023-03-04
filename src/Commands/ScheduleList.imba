@@ -21,7 +21,9 @@ export class ScheduleList < Command
 				Name: task.options.name
 				Interval: task.options.expression
 				Timezone: task.options.timezone ?? 'UTC'
-				'Next Due': parser.parseExpression(task.options.expression, options).next!.toString!
+				'Next Due': parser.parseExpression(task.options.expression, options).next!.toDate!.toLocaleString('en-US', {
+					timeZone: task.options.timezone ?? 'UTC'
+				})
 			}
 
 
