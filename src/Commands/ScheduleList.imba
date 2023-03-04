@@ -21,8 +21,16 @@ export class ScheduleList < Command
 				Name: task.options.name
 				Interval: task.options.expression
 				Timezone: task.options.timezone ?? 'UTC'
-				'Next Due': parser.parseExpression(task.options.expression, options).next!.toString!
+				'Next Due': parser.parseExpression(task.options.expression, options).next!.toDate!.toLocaleString('en-US', {
+					timeZone: task.options.timezone ?? 'UTC'
+				})
 			}
+
+
+		if tasks.length == 0
+			this.message 'info', 'No scheduled tasks have been defined'
+
+			this.exit!
 
 		table tasks
 
