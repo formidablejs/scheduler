@@ -1,4 +1,6 @@
+import { parseExpression } from 'cron-parser'
 import { Command } from './Command'
+import { isMatch } from '../Helpers/isMatch'
 
 export class ScheduleRun < Command
 
@@ -6,15 +8,27 @@ export class ScheduleRun < Command
 		'schedule:run'
 
 	get description
-		'Run the scheduled tasks'
+		'Run scheduled tasks'
 
 	def handle
-		if getCron!.getTasks!.size == 0
-			this.message 'info', 'No scheduled tasks have been defined'
+		const date = new Date
+		const tasks = getCron!.getTasks!
+		const matched = []
 
-			return this.exit!
+		tasks.forEach do(task)
+			const options = {
+				currentDate: date
+			}
 
-		this.message 'info', 'Running scheduled tasks every minute.'
+			if task.options.timezone
+				options.timezone = task.options.timezone
 
-		getCron!.getTasks!.forEach do(task)
-			task._scheduler.start!
+			const parsed = parseExpression(task.options.expression, options)
+
+			if isMatch(parsed.next(), date)
+				matched.push task
+
+		matched.forEach do(task)
+			task.now!
+
+		this.exit!
