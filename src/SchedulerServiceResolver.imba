@@ -3,6 +3,7 @@ import { Scheduler } from './Scheduler'
 import { Command } from './Commands/Command'
 import { ScheduleList } from './Commands/ScheduleList'
 import { ScheduleRun } from './Commands/ScheduleRun'
+import { ScheduleWork } from './Commands/ScheduleWork'
 import cron from 'node-cron'
 
 export class SchedulerServiceResolver < ServiceResolver
@@ -20,3 +21,4 @@ export class SchedulerServiceResolver < ServiceResolver
 		# register command to application
 		self.app.registerCommand(ScheduleList)
 		self.app.registerCommand(ScheduleRun)
+		self.app.registerCommand(ScheduleWork)
