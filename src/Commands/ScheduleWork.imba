@@ -18,6 +18,13 @@ export class ScheduleWork < Command
 
 		this.message 'info', 'Running scheduled tasks every minute.'
 
-		await Promise.all(tasks.map do(task) task[1]._scheduler.start!)
+		for task of tasks
+			await task[1]._scheduler.start!
 
-		process.on 'SIGINT', this.exit!
+		process.on 'SIGINT', do
+			self.message 'info', 'Stopping scheduled tasks'
+
+			for task of tasks
+				await task[1]._scheduler.stop!
+
+			this.exit!
