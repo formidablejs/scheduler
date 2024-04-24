@@ -1,6 +1,11 @@
-import { parseExpression } from 'cron-parser'
 import { Command } from './Command'
-import { isMatch } from '../Helpers/isMatch'
+
+def matchPattern pattern, value
+	if pattern.indexOf(',') !== -1
+		const patterns = pattern.split(',')
+		return patterns.indexOf(value.toString()) !== -1
+
+	pattern === value.toString()
 
 export class ScheduleRun < Command
 
@@ -23,12 +28,20 @@ export class ScheduleRun < Command
 			if task.options.timezone
 				options.timezone = task.options.timezone
 
-			const parsed = parseExpression(task.options.expression, options)
+			task._scheduler.timeMatcher.shouldRun = do(date\Date)
+				date = this.apply(date)
 
-			if isMatch(parsed.next(), date)
+				const runOnMinute = matchPattern(this.expressions[1], date.getMinutes())
+				const runOnHour = matchPattern(this.expressions[2], date.getHours())
+				const runOnDay = matchPattern(this.expressions[3], date.getDate())
+				const runOnMonth = matchPattern(this.expressions[4], date.getMonth() + 1)
+				const runOnWeekDay = matchPattern(this.expressions[5], date.getDay())
+
+				runOnMinute && runOnHour && runOnDay && runOnMonth && runOnWeekDay
+
+			if task._scheduler.timeMatcher.shouldRun(date)
 				matched.push task
 
-		matched.forEach do(task)
-			task.now!
+		await Promise.all(matched.map do(task) task._task.execute('manual'))
 
 		this.exit!

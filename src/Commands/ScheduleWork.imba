@@ -20,3 +20,11 @@ export class ScheduleWork < Command
 
 		for task of tasks
 			await task[1]._scheduler.start!
+
+		process.on 'SIGINT', do
+			self.message 'info', 'Stopping scheduled tasks'
+
+			for task of tasks
+				await task[1]._scheduler.stop!
+
+			this.exit!
