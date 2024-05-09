@@ -19,12 +19,12 @@ export class ScheduleWork < Command
 		this.message 'info', 'Running scheduled tasks every minute.'
 
 		for task of tasks
-			await task[1]._scheduler.start!
+			task[1].start!
 
 		process.on 'SIGINT', do
 			self.message 'info', 'Stopping scheduled tasks'
 
 			for task of tasks
-				await task[1]._scheduler.stop!
+				await task[1].stop!
 
 			this.exit!
