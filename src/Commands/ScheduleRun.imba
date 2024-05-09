@@ -40,8 +40,23 @@ export class ScheduleRun < Command
 				runOnMinute && runOnHour && runOnDay && runOnMonth && runOnWeekDay
 
 			if task._scheduler.timeMatcher.shouldRun(date)
-				matched.push task
+				matched.push task._task
 
-		await Promise.all(matched.map do(task) task._task.execute('manual'))
+		let successful = 0
+
+		def resolve task
+			task.on 'task-failed', do(error)
+				successful += 1
+
+				console.error('error', error)
+
+			task.on 'task-finished', do successful += 1
+
+			await task.execute('manual')
+
+		await Promise.all(matched.map(resolve))
+
+		while successful !== matched.length
+			await new Promise do(resolve) setTimeout(resolve, 1000)
 
 		this.exit!
